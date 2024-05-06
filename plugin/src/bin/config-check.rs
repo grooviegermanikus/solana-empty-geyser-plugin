@@ -1,4 +1,4 @@
-use {clap::Parser, geyser_empty_plugin::config::Config};
+use clap::Parser;
 
 #[derive(Debug, Parser)]
 #[clap(author, version, about)]

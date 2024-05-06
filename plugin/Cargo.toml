@@ -16,6 +16,7 @@ name = "config-check"
 solana-sdk = { workspace = true }
 solana-geyser-plugin-interface = { workspace = true }
 
+log = "0.4.17"
 tokio = { version = "1.21.2", features = ["rt-multi-thread", "macros", "time", "fs"] }
 serde = { version = "1.0.160", features = ["derive"] }
 serde_json = "1.0.96"

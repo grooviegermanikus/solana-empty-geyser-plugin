@@ -9,7 +9,7 @@ pub struct Config {}
 
 #[derive(Debug, Clone, Deserialize)]
 #[serde(deny_unknown_fields)]
-pub struct ConfigQuicPlugin {}
+pub struct ConfigForPlugin {}
 
 impl Config {
     fn load_from_str(config: &str) -> std::result::Result<Self, GeyserPluginError> {
