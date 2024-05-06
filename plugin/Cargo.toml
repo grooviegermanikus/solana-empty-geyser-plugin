@@ -12,6 +12,7 @@ name = "config-check"
 
 [dependencies]
 solana-sdk = { workspace = true }
+solana-logger = { workspace = true }
 solana-geyser-plugin-interface = { workspace = true }
 
 log = "0.4.17"

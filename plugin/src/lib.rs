@@ -1,13 +1,28 @@
-use std::time::SystemTime;
+use std::cell::RefCell;
+use std::ops::Sub;
+use std::sync::Arc;
+use std::sync::atomic::AtomicU64;
+use std::time::{Duration, SystemTime};
 use log::info;
 use solana_geyser_plugin_interface::geyser_plugin_interface::{GeyserPlugin, ReplicaAccountInfoVersions};
 use solana_sdk::clock::Slot;
+use crate::debouncer::Debouncer;
 
 
 pub mod config;
+mod debouncer;
 
-#[derive(Debug, Default)]
+#[derive(Debug)]
 pub struct Plugin {
+    debouncer: Debouncer,
+}
+
+impl Default for Plugin {
+    fn default() -> Self {
+        Self {
+            debouncer: Debouncer::new(Duration::from_millis(2)),
+        }
+    }
 }
 
 impl GeyserPlugin for Plugin {
@@ -19,6 +34,8 @@ impl GeyserPlugin for Plugin {
         &mut self,
         _config_file: &str,
     ) -> solana_geyser_plugin_interface::geyser_plugin_interface::Result<()> {
+        solana_logger::setup_with_default(&"info");
+
         Ok(())
     }
 
@@ -30,7 +47,12 @@ impl GeyserPlugin for Plugin {
     }
 
     fn update_account(&self, account: ReplicaAccountInfoVersions, slot: Slot, is_startup: bool) -> solana_geyser_plugin_interface::geyser_plugin_interface::Result<()> {
+        println!("update_account");
         if is_startup {
+            return Ok(());
+        }
+
+        if !self.debouncer.can_fire() {
             return Ok(());
         }
 
