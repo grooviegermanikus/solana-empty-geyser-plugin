@@ -1176,7 +1176,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "geyser-empty-plugin"
+name = "geyser-account-timestamp-tagging-plugin"
 version = "0.1.0"
 dependencies = [
  "anyhow",

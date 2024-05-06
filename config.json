@@ -1,3 +1,3 @@
 {
-    "libpath": "/home/galactus/mangolana/empty-plugin/target/debug/libgeyser_empty_plugin.so"
+    "libpath": "../libgeyser_account_timestamp_tagging_plugin.so"
 }
