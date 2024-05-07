@@ -47,7 +47,6 @@ impl GeyserPlugin for Plugin {
     }
 
     fn update_account(&self, account: ReplicaAccountInfoVersions, slot: Slot, is_startup: bool) -> solana_geyser_plugin_interface::geyser_plugin_interface::Result<()> {
-        println!("update_account");
         if is_startup {
             return Ok(());
         }
