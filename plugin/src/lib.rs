@@ -4,7 +4,7 @@ use std::sync::Arc;
 use std::sync::atomic::AtomicU64;
 use std::time::{Duration, SystemTime};
 use log::info;
-use solana_geyser_plugin_interface::geyser_plugin_interface::{GeyserPlugin, ReplicaAccountInfoVersions};
+use solana_geyser_plugin_interface::geyser_plugin_interface::{GeyserPlugin, ReplicaAccountInfoVersions, SlotStatus};
 use solana_sdk::clock::Slot;
 use crate::debouncer::Debouncer;
 
@@ -44,6 +44,14 @@ impl GeyserPlugin for Plugin {
     // true is actually the default
     fn account_data_notifications_enabled(&self) -> bool {
         true
+    }
+
+    fn update_slot_status(&self, slot: Slot, _parent: Option<u64>, _status: SlotStatus) -> solana_geyser_plugin_interface::geyser_plugin_interface::Result<()> {
+        let now = SystemTime::now();
+        let since_the_epoch = now.duration_since(SystemTime::UNIX_EPOCH).expect("Time went backwards");
+
+        info!("account slot: timestamp_us={};slot={}", since_the_epoch.as_micros(), slot);
+        Ok(())
     }
 
     fn update_account(&self, account: ReplicaAccountInfoVersions, slot: Slot, is_startup: bool) -> solana_geyser_plugin_interface::geyser_plugin_interface::Result<()> {
