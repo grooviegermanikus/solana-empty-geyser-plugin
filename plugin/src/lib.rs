@@ -51,9 +51,10 @@ impl GeyserPlugin for Plugin {
             return Ok(());
         }
 
-        if !self.debouncer.can_fire() {
-            return Ok(());
-        }
+        // TODO is that good?
+        // if !self.debouncer.can_fire() {
+        //     return Ok(());
+        // }
 
         let account = match account {
             ReplicaAccountInfoVersions::V0_0_1(_info) => {
