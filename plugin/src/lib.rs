@@ -50,7 +50,7 @@ impl GeyserPlugin for Plugin {
         let now = SystemTime::now();
         let since_the_epoch = now.duration_since(SystemTime::UNIX_EPOCH).expect("Time went backwards");
 
-        info!("account slot: timestamp_us={};slot={}", since_the_epoch.as_micros(), slot);
+        info!("slot update: timestamp_us={};slot={}", since_the_epoch.as_micros(), slot);
         Ok(())
     }
 
