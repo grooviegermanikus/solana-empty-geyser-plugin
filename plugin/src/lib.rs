@@ -6,6 +6,7 @@ use std::time::{Duration, SystemTime};
 use log::info;
 use solana_geyser_plugin_interface::geyser_plugin_interface::{GeyserPlugin, ReplicaAccountInfoVersions, SlotStatus};
 use solana_sdk::clock::Slot;
+use solana_sdk::pubkey::Pubkey;
 use crate::debouncer::Debouncer;
 
 
@@ -78,7 +79,11 @@ impl GeyserPlugin for Plugin {
         let now = SystemTime::now();
         let since_the_epoch = now.duration_since(SystemTime::UNIX_EPOCH).expect("Time went backwards");
 
-        info!("account update: write_version={};timestamp_us={};slot={}", account.write_version, since_the_epoch.as_micros(), slot);
+        let pubkey = Pubkey::new_from_array(account.pubkey.try_into().unwrap());
+        let owner = Pubkey::new_from_array(account.owner.try_into().unwrap());
+
+        info!("account update: account_pk={};owner={};write_version={};timestamp_us={};slot={}",
+            pubkey, owner, account.write_version, since_the_epoch.as_micros(), slot);
 
         Ok(())
     }
