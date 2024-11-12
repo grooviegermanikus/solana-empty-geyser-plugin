@@ -9,10 +9,10 @@ lto = true
 codegen-units = 1
 
 [workspace.dependencies]
-solana-geyser-plugin-interface = "=1.18.22"
-solana-sdk = "=1.18.22"
-solana-logger = "=1.18.22"
-solana-streamer = "=1.18.22"
-solana-quic-client = "=1.18.22"
-solana-net-utils = "=1.18.22"
-solana-connection-cache = "=1.18.22"
+agave-geyser-plugin-interface = "=2.0.10"
+solana-sdk = "=2.0.10"
+solana-logger = "=2.0.10"
+solana-streamer = "=2.0.10"
+solana-quic-client = "=2.0.10"
+solana-net-utils = "=2.0.10"
+solana-connection-cache = "=2.0.10"
