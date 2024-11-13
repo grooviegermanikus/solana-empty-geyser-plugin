@@ -57,15 +57,6 @@ impl GeyserPlugin for Plugin {
     }
 
     fn update_account(&self, account: ReplicaAccountInfoVersions, slot: Slot, is_startup: bool) -> agave_geyser_plugin_interface::geyser_plugin_interface::Result<()> {
-        if is_startup {
-            return Ok(());
-        }
-
-        // TODO is that good?
-        // if !self.debouncer.can_fire() {
-        //     return Ok(());
-        // }
-
         let account = match account {
             ReplicaAccountInfoVersions::V0_0_1(_info) => {
                 unreachable!("ReplicaAccountInfoVersions::V0_0_1 is not supported")
@@ -82,7 +73,8 @@ impl GeyserPlugin for Plugin {
         let pubkey = Pubkey::new_from_array(account.pubkey.try_into().unwrap());
         let owner = Pubkey::new_from_array(account.owner.try_into().unwrap());
 
-        info!("account update: account_pk={};owner={};write_version={};timestamp_us={};slot={}",
+        info!("account {}: account_pk={};owner={};write_version={};timestamp_us={};slot={}",
+            if is_startup { "snapshot" } else { "update" },
             pubkey, owner, account.write_version, since_the_epoch.as_micros(), slot);
 
         Ok(())
