@@ -14,7 +14,7 @@ name = "config-check"
 
 [dependencies]
 solana-sdk = { workspace = true }
-solana-geyser-plugin-interface = { workspace = true }
+agave-geyser-plugin-interface = { workspace = true }
 
 tokio = { version = "1.21.2", features = ["rt-multi-thread", "macros", "time", "fs"] }
 serde = { version = "1.0.160", features = ["derive"] }

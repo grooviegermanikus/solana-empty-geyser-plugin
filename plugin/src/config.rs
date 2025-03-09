@@ -1,7 +1,7 @@
 use std::{fs::read_to_string, path::Path};
 
 use serde::Deserialize;
-use solana_geyser_plugin_interface::geyser_plugin_interface::GeyserPluginError;
+use agave_geyser_plugin_interface::geyser_plugin_interface::GeyserPluginError;
 
 #[derive(Debug, Clone, Deserialize)]
 #[serde(deny_unknown_fields)]
