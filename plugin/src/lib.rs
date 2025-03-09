@@ -15,6 +15,7 @@ impl GeyserPlugin for Plugin {
     fn on_load(
         &mut self,
         _config_file: &str,
+        _is_reload: bool,
     ) -> agave_geyser_plugin_interface::geyser_plugin_interface::Result<()> {
         Ok(())
     }
